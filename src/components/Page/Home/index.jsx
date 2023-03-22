@@ -16,19 +16,19 @@ export default function Home() {
                             <div className="collapse navbar-collapse" id="navbarsExplore">
                                 <ul className="navbar-nav">
                                     <li className="nav-item">
-                                        <a className="nav-link" href="/javascript">Lifestyle</a>
+                                        <a className="nav-link" href="/javascript">Daily</a>
                                     </li>
                                     <li className="nav-item">
                                         <a className="nav-link" href="/javascript">Food</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="/javascript">Home</a>
+                                        <a className="nav-link" href="/javascript">Knowledge</a>
                                     </li>
                                     <li className="nav-item">
                                         <a className="nav-link" href="/javascript">Travel</a>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <a className="nav-link dropdown-toggle" href="http://example.com" id="dropdown01"
+                                        <a className="nav-link dropdown-toggle" id="dropdown01" href='/javascript'
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
                                         <div className="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
                                             <a className="dropdown-item" href="/javascript">Astronomy</a>

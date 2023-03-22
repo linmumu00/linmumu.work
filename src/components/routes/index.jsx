@@ -3,7 +3,7 @@ import Author from "../Page/Author";
 import Post from "../Page/Post";
 
 
-export default [
+var routes = [
     {
         path: '/home',
         element: <Home />
@@ -21,3 +21,5 @@ export default [
         element: <Home />
     },
 ]
+
+export default routes
