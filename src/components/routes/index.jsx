@@ -6,6 +6,7 @@ import Post from "../Page/Post";
 import Show from "../Page/Show";
 import Register from "../Page/Author/Login/Register";
 import Sign from "../Page/Author/Login/Sign";
+import Forget from "../Page/Author/Login/Forget";
 
 
 var routes =
@@ -43,29 +44,15 @@ var routes =
                             element: <Register />
                         },
                         {
+                            path: 'forget',
+                            element: <Forget />
+                        },
+                        {
                             path: '',
                             element: <Register />
                         }
                     ]
 
-                },
-                {
-                    path: '',
-                    element: <Login />,
-                    children: [
-                        {
-                            path: 'sign',
-                            element: <Sign />
-                        },
-                        {
-                            path: 'register',
-                            element: <Register />
-                        },
-                        {
-                            path: '',
-                            element: <Register />
-                        }
-                    ]
                 }
             ]
         },

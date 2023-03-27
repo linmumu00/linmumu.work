@@ -7,7 +7,7 @@ export default function Enter() {
                 style={{ backgroundColor: 'rgb(240, 114, 12)' }}>
             </div>
             <div className="container mb-4">
-                <img src="public\assets\img\av.png" className="mt-neg100 mb-4 rounded-circle" width="128" alt='author' />
+                <img src="../assets/img/av.png" className="mt-neg100 mb-4 rounded-circle" width="128" alt='author' />
                 <h1 className="font-weight-bold title">Sal</h1>
                 <p>
                     I love Art, Web Design, Photography, Design, Illustration

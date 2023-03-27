@@ -3,9 +3,6 @@ import Page from './components/Page'
 import Footer from './components/Footer'
 import Header from './components/Header'
 
-import './css/theme.css'
-import './css/bootstrap.css'
-
 
 
 

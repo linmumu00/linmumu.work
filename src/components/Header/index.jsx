@@ -6,7 +6,7 @@ export default function Header() {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-                <Link to='/show' style={{ marginRight: '1rem' }}><img src="assets/img/logo.png" alt='lpicture' /></Link>
+                <Link to='/show' style={{ marginRight: '1rem' }}><img src="/assets/img/logo.png" alt='lpicture' /></Link>
                 {/* <a className="navbar-brand font-weight-bolder mr-3" href="index.html"><img src="assets/img/logo.png" alt='lpicture' /></a> */}
                 <button className="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault"
                     aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@ export default function Header() {
                         <li className="nav-item">
                             {/* <a className="nav-link" href="author.html"><img className="rounded-circle mr-2" src="assets/img/av.png"
                                 width="30" alt='lpicture' /><span className="align-middle">Author</span></a> */}
-                            <MyNavLink to='/author'><img className="rounded-circle mr-2" src="assets/img/av.png"
+                            <MyNavLink to='/author'><img className="rounded-circle mr-2" src="/assets/img/av.png"
                                 width="30" alt='lpicture' /><span className="align-middle">Author</span></MyNavLink>
                         </li>
                         <li className="nav-item dropdown">
