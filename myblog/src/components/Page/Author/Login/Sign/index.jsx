@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Sign() {
-    const handleSubmit = (event) => {
+    function handleSubmit(event) {
         event.preventDefault();
         // 发送的请求头（request headers）是 application/x-www-form-urlencoded 类型，
         // 因此需要更改请求正文的格式以匹配后端期望的格式。
@@ -19,6 +19,8 @@ export default function Sign() {
         }).then(response => response.json()
         ).then(data => {
             console.log('Success:', data);
+            const message = data.message
+            alert(message)
         }).catch((error) => {
             console.error('Error:', error);
         });
@@ -26,7 +28,7 @@ export default function Sign() {
     }
     return (
         <div>
-            <form onSubmit={() => { handleSubmit() }}>
+            <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="exampleDropdownFormEmail2">Email address</label>
                     <input type="email" name='email' className="form-control" id="exampleDropdownFormEmail2" autoComplete="on" placeholder="email@example.com" />

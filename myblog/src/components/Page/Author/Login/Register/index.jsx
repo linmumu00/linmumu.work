@@ -50,24 +50,9 @@ export default class Register extends Component {
                     <button type="submit" className="btn btn-primary" >Sign in</button>
                 </form>
 
-                {/* <form onSubmit={this.handleSubmit} >
-                    <label>
-                        Password:
-                        <input type="text" name="password" id="password" />
-                    </label>
-                    <br />
-                    <label>
-                        Email:
-                        <input type="email" name="email" id="email" />
-                    </label>
-                    <br />
-                    <button type="submit">Submit</button>
-                </form> */}
 
                 <Link className="dropdown-item" to='/author/login/sign' >New around here? Sign up</Link>
                 <Link className="dropdown-item" to='/author/login/forget' >Forgot password?</Link>
-                {/* <a className="dropdown-item" href="/javascript">New around here? Sign up</a>
-                <a className="dropdown-item" href="/javascript">Forgot password?</a> */}
             </div>
         )
     }
