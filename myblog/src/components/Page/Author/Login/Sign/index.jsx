@@ -19,12 +19,11 @@ export default function Sign() {
         }).then(response => response.json()
         ).then(data => {
             console.log('Success:', data);
-            const message = data.message
-            alert(message)
+            localStorage.setItem('token', JSON.stringify(data.token));
+            localStorage.setItem('email', JSON.stringify(data.email))
         }).catch((error) => {
             console.error('Error:', error);
         });
-
     }
     return (
         <div>

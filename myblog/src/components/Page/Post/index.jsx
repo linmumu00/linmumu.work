@@ -1,10 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router';
+import userToken from '../../../useToken';
 
 export default function Post() {
+
+    const navigate = useNavigate()
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [imageFile, setImageFile] = useState(null);
+    const [videoFile, setVideoFile] = useState(null);
+    const email = localStorage.getItem("email")
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('content', content);
+        formData.append('imageFile', imageFile);
+        formData.append('videoFile', videoFile);
+        formData.append('email', email);
+
+        try {
+            const response = await fetch('http://127.0.0.1:3007/post/articles', {
+                method: 'POST',
+                body: formData,
+            });
+            const data = await response.json();
+            alert(data.message)
+            navigate('/author/enter')
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        userToken(navigate, 'post')
+    }, [])
     return (
         <main role="main">
-
-
             <section className="bg-gray200 pt-5 pb-5">
                 <div className="container">
                     <div className="row justify-content-center">
@@ -26,22 +60,44 @@ export default function Post() {
                                     <small className="d-block"><a className="btn btn-sm btn-gray200" href="/javascript"><i
                                         className="fa fa-external-link"></i> Visit Website</a></small>
                                     <div id="comments" className="mt-4">
-                                        <div id="disqus_thread">
-                                        </div>
+                                        <form onSubmit={handleSubmit} encType="multipart/form-data">
+                                            <label htmlFor="title">Title</label>
+                                            <input
+                                                type="text"
+                                                id="title"
+                                                value={title}
+                                                onChange={(e) => setTitle(e.target.value)}
+                                            />
+                                            <br />
+                                            <label htmlFor="content">Content</label>
+                                            <textarea
+                                                id="content"
+                                                value={content}
+                                                onChange={(e) => setContent(e.target.value)}
+                                            />
+                                            <br />
+                                            <label htmlFor="image">Image</label>
+                                            <input
+                                                type="file"
+                                                name="imageFile"
+                                                id="image"
+                                                accept=".jpg,.png,.jpeg"
+                                                onChange={(e) => setImageFile(e.target.files[0])}
+                                            />
+                                            <br />
+                                            <label htmlFor="video">Video</label>
+                                            <input
+                                                type="file"
+                                                name="videoFile"
+                                                id="video"
+                                                accept=".mp4"
+                                                onChange={(e) => setVideoFile(e.target.files[0])}
+                                            />
+                                            <br />
+                                            <button type="submit">Submit</button>
+                                        </form>
 
-                                        {/* <script type="text/javascript">
-										var disqus_shortname = 'demowebsite';
-										var disqus_developer = 0;
-										(function () {
-											var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-											dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
-											(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-										})();
-									</script>
-									<noscript>
-										Please enable JavaScript to view the <a
-											href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-									</noscript> */}
+
                                     </div>
 
                                 </div>

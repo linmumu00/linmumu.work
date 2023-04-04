@@ -1,6 +1,34 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router'
+
 
 export default function Enter() {
+    const navigate = useNavigate()
+    const email = localStorage.getItem("email")
+    const result = useRef([])
+    const params = new URLSearchParams()
+    params.append("email", email)
+    function topost() {
+        navigate('/post')
+    }
+    useEffect(() => {
+        fetch('http://127.0.0.1:3007/user/enter', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: params,
+        }).then(response => response.json()
+        ).then(data => {
+            console.log('Success:', data);
+            result.current = data.results
+            console.log(result);
+        }).catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+    )
+
     return (
         <main role="main">
             <div className="jumbotron border-round-0 min-50vh"
@@ -16,6 +44,21 @@ export default function Enter() {
             <div className="container-fluid mb-5">
                 <div className="row">
                     <div className="card-columns">
+                        {result.current.length === 0 ? <div><h2>你还没有发表过作品</h2><button onClick={topost}>点我去发表作品</button></div> :
+                            result.current.map((userObj) => {
+                                return (
+                                    <div className="card card-pin" key={userObj.id}>
+                                        <img className="card-img" alt="Card authorimage" src={`http://127.0.0.1:3008/get/photo/${userObj.imagefile}`} />
+                                        <div className="overlay">
+                                            <h2 className="card-title title">{userObj.title}</h2>
+                                            <div className="more">
+                                                <a href="post.html">
+                                                    <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         <div className="card card-pin">
                             <img className="card-img"
                                 src="https://images.unsplash.com/photo-1489743342057-3448cc7c3bb9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6d284a2efbca5f89528546307f7e7b87&auto=format&fit=crop&w=500&q=60"
@@ -30,7 +73,7 @@ export default function Enter() {
                         </div>
                         <div className="card card-pin">
                             <img className="card-img"
-                                src="https://images.unsplash.com/photo-1519996521430-02b798c1d881?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=79f770fc1a5d8ff9b0eb033d0f09e15d&auto=format&fit=crop&w=500&q=60"
+                                src="http://127.0.0.1:3008/get/photo/1680526179808å¾®ä¿¡å¾ç_20210316123216.jpg"
                                 alt="Card authorimage" />
                             <div className="overlay">
                                 <h2 className="card-title title">Some Title</h2>
@@ -256,6 +299,7 @@ export default function Enter() {
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
