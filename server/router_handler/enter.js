@@ -10,7 +10,14 @@ exports.articles = (req, res) => {
         // 执行 SQL 语句失败
         if (err) return res.cc(err)
         // 执行 SQL 语句成功，但是查询到数据条数不等于 1
-        if (results.length === 0) { return res.cc('用户没有发布作品！') }
+        if (results.length === 0) {
+            return res.send({
+                status: 1,
+                message: "用户没有发布过文章",
+                email: email,
+                results: [],
+            })//当结果为0的时候也要把result传回去，不然前端无法判断
+        }
         // TODO：登录成功
         res.send({
             status: 0,

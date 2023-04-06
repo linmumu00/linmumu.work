@@ -17,7 +17,7 @@ export default function Author() {
     useEffect(() => {
         userToken(navigate, 'author')
         return () => { };
-    }, [])
+    }, []) //卸载组件时运行，不然无法跳转到其它页面去了
 
     return (
         <div>

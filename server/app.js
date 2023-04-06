@@ -7,16 +7,16 @@ const app = express()
 const cors = require('cors')
 app.use(cors())
 
-// // 设置允许跨域访问的域名
+// 设置允许跨域访问的域名
 // const allowedOrigins = ['http://localhost:3000'];
 
-// // 设置响应头，允许跨域访问
+// 设置响应头，允许跨域访问
 // app.use((req, res, next) => {
 //     const origin = req.headers.origin;
 //     if (allowedOrigins.indexOf(origin) > -1) {
 //         res.setHeader('Access-Control-Allow-Origin', origin);
 //     }
-//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,Authorization');
 //     next();
 // });
 
@@ -54,14 +54,14 @@ app.use('/post', postUser)
 app.use('/get', getPhoto)
 
 // 错误中间件
-app.use(function (err, req, res, next) {
-    //验证失败导致的错误
-    if (err instanceof joi.ValidationError) return res.cc(err)
-    // 捕获身份认证失败的错误
-    if (err.name === 'Unauthorizedrror') return res.cc('身份认证失败！')
-    // 未知错误...
-    res.cc(err)
-})
+// app.use(function (err, req, res, next) {
+//     //验证失败导致的错误
+//     if (err instanceof joi.ValidationError) return res.cc(err)
+//     // 捕获身份认证失败的错误
+//     if (err.name === 'Unauthorizedrror') return res.cc('身份认证失败！')
+//     // 未知错误...
+//     res.cc(err)
+// })
 
 
 

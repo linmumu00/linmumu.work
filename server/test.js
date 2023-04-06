@@ -5,15 +5,18 @@ const path = require('path');
 // 设置允许跨域访问的域名
 const allowedOrigins = ['http://localhost:3000'];
 
+
+const cors = require('cors')
+app.use(cors())
 // 设置响应头，允许跨域访问
-app.use((req, res, next) => {
-    const origin = req.headers.origin;
-    if (allowedOrigins.indexOf(origin) > -1) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+// app.use((req, res, next) => {
+//     const origin = req.headers.origin;
+//     if (allowedOrigins.indexOf(origin) > -1) {
+//         res.setHeader('Access-Control-Allow-Origin', origin);
+//     }
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     next();
+// });
 
 // 获取图片
 app.get('/get/photo/:imageName', (req, res) => {

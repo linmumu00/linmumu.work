@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 
 
 export default function Enter() {
     const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(true);
     const email = localStorage.getItem("email")
     const result = useRef([])
     const params = new URLSearchParams()
@@ -22,12 +23,12 @@ export default function Enter() {
         ).then(data => {
             console.log('Success:', data);
             result.current = data.results
-            console.log(result);
+            console.log(data, result, result.current);
+            setIsLoading(false)
         }).catch((error) => {
             console.error('Error:', error);
         });
-    }
-    )
+    }, [])
 
     return (
         <main role="main">
@@ -44,21 +45,23 @@ export default function Enter() {
             <div className="container-fluid mb-5">
                 <div className="row">
                     <div className="card-columns">
-                        {result.current.length === 0 ? <div><h2>你还没有发表过作品</h2><button onClick={topost}>点我去发表作品</button></div> :
-                            result.current.map((userObj) => {
-                                return (
-                                    <div className="card card-pin" key={userObj.id}>
-                                        <img className="card-img" alt="Card authorimage" src={`http://127.0.0.1:3008/get/photo/${userObj.imagefile}`} />
-                                        <div className="overlay">
-                                            <h2 className="card-title title">{userObj.title}</h2>
-                                            <div className="more">
-                                                <a href="post.html">
-                                                    <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+                        {
+                            isLoading ? <div>Loading...</div> :
+                                result.current.length === 0 ? <div><h2>你还没有发表过作品</h2><button onClick={topost}>点我去发表作品</button></div> :
+                                    result.current.map((userObj) => {
+                                        return (
+                                            <div className="card card-pin" key={userObj.id}>
+                                                <img className="card-img" alt="Card authorimage" src={`http://127.0.0.1:3007/get/photo/${userObj.imagefile}`} />
+                                                <div className="overlay">
+                                                    <h2 className="card-title title">{userObj.title}</h2>
+                                                    <div className="more">
+                                                        <a href="post.html">
+                                                            <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                )
-                            })}
+                                        )
+                                    })}
                         <div className="card card-pin">
                             <img className="card-img"
                                 src="https://images.unsplash.com/photo-1489743342057-3448cc7c3bb9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6d284a2efbca5f89528546307f7e7b87&auto=format&fit=crop&w=500&q=60"
@@ -71,18 +74,7 @@ export default function Enter() {
                                 </div>
                             </div>
                         </div>
-                        <div className="card card-pin">
-                            <img className="card-img"
-                                src="http://127.0.0.1:3008/get/photo/1680526179808å¾®ä¿¡å¾ç_20210316123216.jpg"
-                                alt="Card authorimage" />
-                            <div className="overlay">
-                                <h2 className="card-title title">Some Title</h2>
-                                <div className="more">
-                                    <a href="post.html">
-                                        <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-                                </div>
-                            </div>
-                        </div>
+
                         <div className="card card-pin">
                             <img className="card-img"
                                 src="https://images.unsplash.com/photo-1505210512658-3ae58ae08744?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2ef2e23adda7b89a804cf232f57e3ca3&auto=format&fit=crop&w=333&q=80"
