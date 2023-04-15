@@ -31,7 +31,7 @@ export default function Header() {
                             <MyNavLink to='/author'><img className="rounded-circle mr-2" src="/assets/img/av.png"
                                 width="30" alt='lpicture' /><span className="align-middle">Author</span></MyNavLink>
                         </li>
-                        <li className="nav-item dropdown">
+                        {/* <li className="nav-item dropdown">
                             <a className="nav-link" href="/javascript" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 <svg style={{ marginTop: '10px' }} className="_3DJPT" version="1.1" viewBox="0 0 32 32" width="21"
@@ -49,7 +49,7 @@ export default function Header() {
                                     href="https://github.com/wowthemesnet/template-pintereso-bootstrap-html/archive/master.zip"
                                     className="btn btn-primary d-block"><i className="fa fa-download"></i> Download</a></span>
                             </div>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </nav>
