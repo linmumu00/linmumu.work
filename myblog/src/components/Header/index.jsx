@@ -1,11 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react'
 import MyNavLink from '../MyNavLink'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Header() {
     //除了button按钮其它地方点击了  我的导航栏都会收上去（当屏幕小的时候才会有导航栏）
     const [collapsed, setCollapsed] = useState(true);
     const navRef = useRef(null);
+    const [showMenu, setShowMenu] = useState('none');
+    const navigate = useNavigate()
+
+    function handleMouseEnter() {
+        setShowMenu('flex');
+    }
+
+    function handleMouseLeave() {
+        setShowMenu('none');
+    }
+
+    function deletereg() {
+        localStorage.setItem("token", '');
+        navigate('/author/login/register');
+    }//注销按钮
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -44,10 +59,17 @@ export default function Header() {
                         <li className="nav-item">
                             <MyNavLink to='/post'>Post</MyNavLink>
                         </li>
-                        <li className="nav-item">
-                            <MyNavLink to='/author'><img className="rounded-circle mr-2" src="/assets/img/av.png"
-                                width="30" alt='lpicture' /><span className="align-middle">Author</span></MyNavLink>
-                        </li>
+                        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}  >
+                            <li className="nav-item dropdown hover-background" >
+                                <MyNavLink to='/author'><img className="rounded-circle mr-2" src="/assets/img/av.png"
+                                    width="30" alt='lpicture' /><span className="align-middle">Author</span></MyNavLink>
+                                <div className="shadow-lg" style={{ position: "absolute", display: showMenu, flexWrap: "wrap" }} >
+                                    <div style={{ cursor: 'pointer' }} className="dropdown-item" >修改密码</div>
+                                    <div style={{ cursor: 'pointer' }} className="dropdown-item" >设置头像</div>
+                                    <div style={{ cursor: 'pointer' }} className="dropdown-item" onClick={deletereg}>退出登录</div>
+                                </div>
+                            </li>
+                        </div>
 
                     </ul>
                 </div>

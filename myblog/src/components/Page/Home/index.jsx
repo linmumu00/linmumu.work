@@ -17,13 +17,13 @@ export default function Home() {
                 <div className="container mb-4">
                     <h1 className="font-weight-bold title">Explore</h1>
                     <div className="row">
-                        <nav className="navbar navbar-expand-lg navbar-light bg-white pl-2 pr-2">
+                        <nav className="bg-Azure navbar-expand-lg navbar-light">
                             <button className="navbar-light navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarsExplore" aria-controls="navbarsDefault" aria-expanded="false"
                                 aria-label="Toggle navigation">
                                 <span className="navbar-toggler-icon"></span>
                             </button>
-                            <div className="collapse navbar-collapse" id="navbarsExplore">
+                            <div className="bg-Azure collapse navbar-collapse" id="navbarsExplore">
                                 <ul className="navbar-nav">
                                     <li className="nav-item">
                                         <a className="nav-link" href="/javascript">Daily</a>
@@ -40,7 +40,7 @@ export default function Home() {
                                     <li className="nav-item dropdown">
                                         <a className="nav-link dropdown-toggle" id="dropdown01" href='/javascript'
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
-                                        <div className="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
+                                        <div className="bg-Azure dropdown-menu shadow-lg" aria-labelledby="dropdown01">
                                             <a className="dropdown-item" href="/javascript">Astronomy</a>
                                             <a className="dropdown-item" href="/javascript">Nature</a>
                                             <a className="dropdown-item" href="/javascript">Cooking</a>

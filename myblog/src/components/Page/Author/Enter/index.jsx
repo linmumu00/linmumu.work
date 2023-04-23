@@ -45,8 +45,8 @@ export default function Enter() {
 
     return (
         <main role="main">
-            <div className="jumbotron border-round-0 min-50vh"
-                style={{ backgroundColor: 'rgb(240, 114, 12)' }}>
+            <div className="d-flex align-items-center justify-content-center " style={{ backgroundColor: 'black', height: "50vh" }}>
+                <img style={{ objectFit: "cover", height: "100%", width: "100%" }} src="/assets/img/pexels-quang-nguyen-vinh-2144922.jpg" alt="" />
             </div>
             <div className="container mb-4">
                 <img src="../assets/img/av.png" className="mt-neg100 mb-4 rounded-circle" width="128" alt='author' />

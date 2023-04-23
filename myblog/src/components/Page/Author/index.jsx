@@ -6,11 +6,6 @@ export default function Author() {
 
     const navigate = useNavigate()
 
-    function deletereg() {
-        localStorage.setItem("token", '');
-        navigate('/author/login/register');
-    }//注销按钮
-
 
     useEffect(() => {
         userToken(navigate, 'author')//加载组件前验证token
@@ -19,7 +14,6 @@ export default function Author() {
 
     return (
         <div className='bg-Azure'>
-            <button className='btn' onClick={deletereg}>注销登录</button>
             <Outlet />
         </div>
     )
