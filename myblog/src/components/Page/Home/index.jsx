@@ -12,8 +12,8 @@ export default function Home() {
 
 
     return (
-        <main role="main">
-            <section className="mt-4 mb-5 showFater">
+        <main className='bg-Azure' role="main">
+            <section className="showFather mt-4 mb-5">
                 <div className="container mb-4">
                     <h1 className="font-weight-bold title">Explore</h1>
                     <div className="row">
@@ -57,7 +57,7 @@ export default function Home() {
 
                 {
                     isShow === 'true' ?
-                        <div className='show'>
+                        <div className='showAct container-fluid'>
                             <button onClick={() => { setisShow('false') }} style={{ display: 'block', float: 'right' }}>关闭</button>
                             <div>
 

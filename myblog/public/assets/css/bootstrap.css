@@ -3460,16 +3460,16 @@ fieldset:disabled a.btn {
 
 /* line 64, node_modules/bootstrap/scss/_buttons.scss */
 .btn-primary {
-  color: #fff;
-  background-color: #bd081c;
-  border-color: #bd081c;
+  color: #ffffff;
+  background-color: rgb(16, 16, 16);
+  border-color: #15bcea;
 }
 
 /* line 13, node_modules/bootstrap/scss/mixins/_hover.scss */
 .btn-primary:hover {
   color: #fff;
-  background-color: #980617;
-  border-color: #8c0615;
+  background-color: #000000;
+  border-color: #0d62ea;
 }
 
 /* line 18, node_modules/bootstrap/scss/mixins/_buttons.scss */
@@ -9228,8 +9228,8 @@ button.close {
 }
 
 /* line 6, node_modules/bootstrap/scss/mixins/_background-variant.scss */
-.bg-primary {
-  background-color: #bd081c !important;
+.bg-Azure {
+  background-color: #F0FFFF !important;
 }
 
 /* line 17, node_modules/bootstrap/scss/mixins/_hover.scss */
@@ -9424,7 +9424,7 @@ button.bg-graylight:focus {
 
 /* line 6, node_modules/bootstrap/scss/mixins/_background-variant.scss */
 .bg-gray200 {
-  background-color: #eee !important;
+  background-color: #46f8ff !important;
 }
 
 /* line 17, node_modules/bootstrap/scss/mixins/_hover.scss */

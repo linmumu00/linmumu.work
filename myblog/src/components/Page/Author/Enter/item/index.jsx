@@ -13,8 +13,8 @@ export default function ImageList(props) {
     const img = props.img
     return (
         <MyContext.Consumer>
-            {({ setisShow }) => (
-                <div className="card card-pin" onClick={() => { setisShow('true') }}>
+            {({ onSetisShow }) => (
+                <div className="card card-pin" onClick={() => { onSetisShow('true', img) }}>
 
                     <Suspense fallback={<img className="card-img" alt="Card authorimage" src='/assets/img/b3a36dfaa9390fb5-a9c0f23cd4324ece-8acc0b0233775d44789e79b2c2e9074f.jpg' />}>
                         <AsyncImages src={img.imagefile} id={img.id} />

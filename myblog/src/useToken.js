@@ -8,22 +8,20 @@ export default function userToken(navigate, components) {
     fetch('http://127.0.0.1:3007/function/token', {
         method: "POST",
         headers: {
-            "Authorization": ('Bearer ' + token) || '',
+            "Authorization": ('Bearer ' + token) || '', //如果没有登录过，token会是undefined，则利用空字符串，以免报错
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     }).then(response => response.json()
     ).then(data => {
         if (data.status === 0) {
             if (components === 'author')
-                navigate('/author/enter');
+                navigate('/author/enter');  //如果是author则验证通过后进入enter界面，其它进入后原地不动
         }
         else {
-            alert(data.message);
-            navigate('/author/login/register');
+            navigate('/author/login/register');//token通过失败则进入登录界面
         }
     }).catch((error) => {
         console.error('Error:', error);
-        alert("登录失败");
-        navigate('/author/login/register');
+        navigate('/author/login/register');//token验证错误也是进入登录界面
     });
 }

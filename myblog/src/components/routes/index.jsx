@@ -53,11 +53,15 @@ var routes =
                         }
                     ]
 
+                },
+                {
+                    path: '',
+                    element: <Enter />
                 }
             ]
         },
         {
-            path: '/',
+            path: '',
             element: <Show />
         },
     ]

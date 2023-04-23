@@ -9,19 +9,17 @@ export default function Author() {
     function deletereg() {
         localStorage.setItem("token", '');
         navigate('/author/login/register');
-    }
+    }//注销按钮
 
-    // const [user, setUser] = useState(null);  
-    // const token = localStorage.getItem("token").replace('"', "").replace('"', "")
 
     useEffect(() => {
-        userToken(navigate, 'author')
-        return () => { };
-    }, []) //卸载组件时运行，不然无法跳转到其它页面去了
+        userToken(navigate, 'author')//加载组件前验证token
+        // return () => { };//卸载组件时运行，不然无法跳转到其它页面去了
+    }, [])
 
     return (
-        <div>
-            <button onClick={deletereg}>注销登录</button>
+        <div className='bg-Azure'>
+            <button className='btn' onClick={deletereg}>注销登录</button>
             <Outlet />
         </div>
     )

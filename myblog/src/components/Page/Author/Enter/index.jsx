@@ -6,13 +6,17 @@ import ImageList from './item';
 
 
 export default function Enter() {
+
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(true);
     const [isShow, setisShow] = useState('false');
+    const [message, setMessage] = useState({})
     const email = localStorage.getItem("email")
     const result = useRef([])
     const params = new URLSearchParams()
     params.append("email", email)
+
+
 
     useEffect(() => {
         fetch('http://127.0.0.1:3007/user/enter', {
@@ -33,6 +37,11 @@ export default function Enter() {
         return () => { }
     }, [])
 
+    function onSetisShow(flag, itemMessage) {
+        setisShow(flag)
+        setMessage(itemMessage)
+    }
+
 
     return (
         <main role="main">
@@ -46,14 +55,24 @@ export default function Enter() {
                     I love Art, Web Design, Photography, Design, Illustration
                 </p>
             </div>
-            <div className="container-fluid mb-5 showfather">
+            <div className="showFather container-fluid mb-5">
                 {
                     isShow === 'true' ?
-                        <div className='show' id='show' >
-                            <button id='false' onClick={() => { setisShow('false') }} style={{}}>关闭</button>
+                        <div className='showAct container-fluid' id='show' >
+                            <button className='btn-info' id='false' onClick={() => { setisShow('false') }} >关闭</button>
                             <blockquote className="blockquote text-center">
-                                <p className="mb-0">A well-known quote, contained in a blockquote element.</p>
-                                <footer className="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                <h3 className="mb-0">{message.title}</h3>
+                                <br /><br />
+                                <div className="mb-0">
+                                    {message.content.split('\n').map((paragraph, index) => (
+                                        <React.Fragment key={index}>
+                                            {paragraph}
+                                            <br />
+                                        </React.Fragment>
+                                    ))}
+                                </div>
+                                <br />
+                                <footer className="blockquote-footer">{message.id} <cite title="Source Title">{message.title}</cite></footer>
                             </blockquote>
                         </div>
                         :
@@ -62,7 +81,7 @@ export default function Enter() {
                                 {
                                     isLoading ? <div >Loading...</div> :
                                         result.current.length === 0 ? <div><h2>你还没有发表过作品</h2><button onClick={navigate('/post')}>点我去发表作品</button></div> :
-                                            <MyContext.Provider value={{ isShow, setisShow }}>
+                                            <MyContext.Provider value={{ isShow, onSetisShow }}>
                                                 {result.current.map((img) => {
                                                     return (
                                                         <ImageList key={img.id} img={img} />

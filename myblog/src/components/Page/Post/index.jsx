@@ -5,11 +5,22 @@ import userToken from '../../../useToken';
 export default function Post() {
 
     const navigate = useNavigate()
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [imageFile, setImageFile] = useState(null);
-    const [videoFile, setVideoFile] = useState(null);
+    const [title, setTitle] = useState(() => {
+        const savedValue = localStorage.getItem("title");
+        return savedValue !== null ? savedValue : "";
+    });
+    // 通过localStorage将输入的值存到本地去，可以让用户切换的时候能够保存数据
+    const [content, setContent] = useState(() => {
+        const savedValue = localStorage.getItem("content");
+        return savedValue !== null ? savedValue : "";
+    });
+    const [imageFile, setImageFile] = useState(() => {
+        const savedValue = localStorage.getItem("imageFile");
+        return savedValue !== null ? savedValue : '';
+    });
     const email = localStorage.getItem("email")
+    const [imagefile, setImagefile] = useState(null)
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,8 +28,7 @@ export default function Post() {
         const formData = new FormData();
         formData.append('title', title);
         formData.append('content', content);
-        formData.append('imageFile', imageFile);
-        formData.append('videoFile', videoFile);
+        formData.append('imagefile', imagefile);
         formData.append('email', email);
 
         try {
@@ -28,83 +38,68 @@ export default function Post() {
             });
             const data = await response.json();
             alert(data.message)
-            navigate('/author/enter')
+            if (data.status === 0)
+                navigate('/author/enter')  //文章发布成功后到达用户界面
         } catch (error) {
             console.error(error);
         }
+        localStorage.removeItem('title')
+        localStorage.removeItem('content')
+        localStorage.removeItem('imageFile')
     };
 
     useEffect(() => {
         userToken(navigate, 'post')
-    }, [])
+        localStorage.setItem("title", title);
+        localStorage.setItem("content", content);
+        localStorage.setItem("imageFile", imageFile);
+    }, [title, content, imageFile])
+
     return (
         <main role="main">
-            <section className="bg-gray200 pt-5 pb-5">
-                <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-md-7">
-                            <article className="card">
-                                <img className="card-img-top mb-2"
-                                    src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e0245bb4e87077312cc3d102e68c1efd&auto=format&fit=crop&w=735&q=80"
-                                    alt="Card postimage" />
-                                <div className="card-body">
-                                    <h1 className="card-title display-4">
-                                        Sushi Rolls </h1>
-                                    <ul>
-                                        <li>5 cups short-grain sushi rice</li>
-                                        <li>6 cups water</li>
-                                        <li>1/2 cup rice vinegar</li>
-                                        <li>2 tablespoons sugar</li>
-                                        <li>A teaspoon of salt</li>
-                                    </ul>
-                                    <small className="d-block"><a className="btn btn-sm btn-gray200" href="/javascript"><i
-                                        className="fa fa-external-link"></i> Visit Website</a></small>
-                                    <div id="comments" className="mt-4">
-                                        <form onSubmit={handleSubmit} encType="multipart/form-data">
-                                            <label htmlFor="title">Title</label>
-                                            <input
-                                                type="text"
-                                                id="title"
-                                                value={title}
-                                                onChange={(e) => setTitle(e.target.value)}
-                                            />
-                                            <br />
-                                            <label htmlFor="content">Content</label>
-                                            <textarea
-                                                id="content"
-                                                value={content}
-                                                onChange={(e) => setContent(e.target.value)}
-                                            />
-                                            <br />
-                                            <label htmlFor="image">Image</label>
-                                            <input
-                                                type="file"
-                                                name="imageFile"
-                                                id="image"
-                                                accept=".jpg,.png,.jpeg"
-                                                onChange={(e) => setImageFile(e.target.files[0])}
-                                            />
-                                            <br />
-                                            <label htmlFor="video">Video</label>
-                                            <input
-                                                type="file"
-                                                name="videoFile"
-                                                id="video"
-                                                accept=".mp4"
-                                                onChange={(e) => setVideoFile(e.target.files[0])}
-                                            />
-                                            <br />
-                                            <button type="submit">Submit</button>
-                                        </form>
+            <section className="bg-Azure pt-5 pb-5">
+                {/* <!-- 表单开始 --> */}
+                <form className="container" onSubmit={handleSubmit} encType="multipart/form-data">
+                    <div className="row">
+                        <div className="col-12 col-sm-4">
+                            <img className="img-fluid" id="article-img"
+                                src={imageFile !== '' ? imageFile : 'https://images.unsplash.com/photo-1516601255109-506725109807?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ce4f3db9818f60686e8e9b62d4920ce5&auto=format&fit=crop&w=500&q=60'}
+                                alt="Card postimage" />
+                            {/* <!-- 图片上传 --> */}
+                            <div className="form-group">
+                                <label className='file-input-label' htmlFor="article-imginput">插入图片</label>
+                                <input style={{ display: 'none' }} type="file" onChange={(e) => { setImagefile(e.target.files[0]); setImageFile(URL.createObjectURL(e.target.files[0])); }} className="form-control-file" id="article-imginput" />
+                                <small className="form-text text-muted">支持JPG、PNG格式的图片，最大不超过5MB</small>
+                            </div>
+                        </div>
+                        <div className="container col-12 col-sm-8">
+                            <h1>发布文章</h1>
 
-
-                                    </div>
-
+                            {/* <!-- 标题输入框 --> */}
+                            <div className="form-group">
+                                <label htmlFor="article-title">标题</label>
+                                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="form-control" id="article-title" placeholder="请输入文章标题" />
+                                {/* <input type="text" value={title?} onChange={(e) => localStorage.setItem("title2", e.target.value)} className="form-control" id="article-title" placeholder="请输入文章标题" /> */}
+                            </div>
+                            <h1 className='text-center pt-5'>{title}</h1>
+                        </div>
+                        <div className="card-body" >
+                            <div id="comments" className="mt-4">
+                                {/* <!-- 正文输入框 --> */}
+                                <div className="form-group">
+                                    <label htmlFor="article-content">正文</label>
+                                    <textarea value={content} onChange={(e) => setContent(e.target.value)} className="form-control" id="article-content" rows="10" placeholder="请输入文章正文" />
                                 </div>
-                            </article>
+
+                                {/* <!-- 提交按钮 --> */}
+                                <button type="submit" className="btn btn-primary">发布</button>
+
+                                {/* <!-- 表单结束 --> */}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
+
                 <div className="container-fluid mt-5">
                     <div className="row">
                         <h5 className="font-weight-bold">More like this</h5>
