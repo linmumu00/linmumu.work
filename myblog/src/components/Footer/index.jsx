@@ -28,12 +28,12 @@ export default function Footer() {
 
                 <p>© <span className="credits font-weight-bold">
                     <a target="_blank" className="text-dark" rel="noreferrer"
-                        href="https://www.wowthemes.net/pintereso-free-html-bootstrap-template/" alt="router"><u>Pintereso Bootstrap
-                            HTML Template</u> by WowThemes.net.</a>
+                        href="https://beian.miit.gov.cn/" alt="router"><u>粤ICP备2022128421号-1</u></a>
+
                 </span>
                 </p>
 
-        
+
             </div>
 
         </footer>
