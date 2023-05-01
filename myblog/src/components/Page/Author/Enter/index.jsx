@@ -19,7 +19,7 @@ export default function Enter() {
 
 
     useEffect(() => {
-        fetch('http://127.0.0.1:3007/user/enter', {
+        fetch('http://43.138.174.71:3007/user/enter', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -27,9 +27,9 @@ export default function Enter() {
             body: params,
         }).then(response => response.json()
         ).then(data => {
-            console.log('Success:', data);
+            // console.log('Success:', data);
             result.current = data.results
-            console.log(data, result, result.current);
+            // console.log(data);
             setIsLoading(false)
         }).catch((error) => {
             console.error('Error:', error);

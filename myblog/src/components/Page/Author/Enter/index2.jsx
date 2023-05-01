@@ -12,7 +12,7 @@ export default function Enter() {
     params.append("email", email)
 
     useEffect(() => {
-        fetch('http://127.0.0.1:3007/user/enter', {
+        fetch('http://43.138.174.71:3007/user/enter', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -66,7 +66,7 @@ export default function Enter() {
 
 
                                                             <div className="card card-pin" onClick={() => { setisShow('true') }}>
-                                                                <img className="card-img" alt="Card authorimage" src={`http://127.0.0.1:3007/get/photo/${userObj.imagefile}`} />
+                                                                <img className="card-img" alt="Card authorimage" src={`http://43.138.174.71:3007/get/photo/${userObj.imagefile}`} />
                                                                 <div className="overlay">
                                                                     <h2 className="card-title title">{userObj.title}</h2>
                                                                     <div className="more">

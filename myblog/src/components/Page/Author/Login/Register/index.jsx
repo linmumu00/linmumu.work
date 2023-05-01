@@ -15,13 +15,13 @@ export default function Register() {
         const params = new URLSearchParams(formData);
         const email = document.getElementById("exampleFormEmail")
 
-        fetch('http://127.0.0.1:3007/api/register', {
+        fetch('http://43.138.174.71:3007/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: params,
-        }).then(response => response.json()
+        }).then(response => { return response.json(); }
         ).then(data => {
             console.log('Success:', data);
             // 将 email token 保存在本地存储中
