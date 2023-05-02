@@ -3,50 +3,58 @@ import MyNavLink from '../MyNavLink'
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function Header() {
-    //除了button按钮其它地方点击了  我的导航栏都会收上去（当屏幕小的时候才会有导航栏）
+    //除了button按钮其它地方点击了  导航栏都会收上去（当屏幕小的时候才会有导航栏）
     const [collapsed, setCollapsed] = useState(true);
-    const navRef = useRef(null);
+    //用于监测点击事件的对象是不是span（导航栏的点击按钮）或者是search标签(input)
+    const navRef1 = useRef(null);
+    const navRef2 = useRef(null)
+    //用于控制author里面的导航栏(客户端鼠标经过的时候显示出来)
     const [showMenu, setShowMenu] = useState('none');
     const navigate = useNavigate()
 
+    //鼠标进入时的函数（用于显示导航栏）
     function handleMouseEnter() {
         setShowMenu('flex');
     }
-
+    //鼠标退出时的函数（用于关闭导航栏）
     function handleMouseLeave() {
         setShowMenu('none');
     }
-
+    //注销按钮
     function deletereg() {
         localStorage.setItem("token", '');
         navigate('/author/login/register');
-    }//注销按钮
-
+    }
+    //进行实时监测用户鼠标的点击位置，如果是在navref勾子上的标签，则展开导航栏
     useEffect(() => {
         function handleClickOutside(event) {
-            if (!navRef.current.contains(event.target)) {
-                return setCollapsed(true);
+            if (event.target !== navRef1.current && event.target !== navRef2.current) {
+                // console.log(event.target, navRef2.current);
+                return setCollapsed(true);   //Ture的时候是关闭状态！！
             }
         }
         document.addEventListener('click', handleClickOutside);
         return () => {
             document.removeEventListener('click', handleClickOutside);
-        };
-    }, [navRef, collapsed]);
+        };//卸载组件时同时卸载监听函数
+    }, [navRef1, navRef2, collapsed]);
 
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-                <Link to='/show' style={{ marginRight: '1rem' }}><img src="/assets/img/logo.png" alt='lpicture' /></Link>
+                <Link to='/show' style={{ marginRight: '1rem' }}><img id='test2' src="/assets/img/logo.png" alt='lpicture' /></Link>
 
-                <button ref={navRef} className="navbar-toggler" type="button" onClick={() => setCollapsed(!collapsed)}>
-                    <span className="navbar-toggler-icon"></span>
+
+
+                <button className="navbar-toggler" type="button" onClick={() => setCollapsed(!collapsed)}>
+                    <span ref={navRef1} className="navbar-toggler-icon"></span>
                 </button>
 
                 <div className={`collapse navbar-collapse ${collapsed ? '' : 'show'}`} id="navbarsDefault">
-                    <ul className="navbar-nav mr-auto align-items-center">
+
+                    <ul className="navbar-nav mr-auto align-items-center" id='test1'>
                         <form className="bd-search hidden-sm-down">
-                            <input type="text" className="form-control bg-graylight border-0 font-weight-bold" id="search-input"
+                            <input ref={navRef2} type="text" className="form-control bg-graylight border-0 font-weight-bold" id="search-input"
                                 placeholder="Search..." autoComplete="off" />
                             <div className="dropdown-menu bd-search-results" id="search-results">
                             </div>

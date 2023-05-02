@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function Sign() {
+    const navigate = useNavigate()
     function handleSubmit(event) {
         event.preventDefault();
         // 发送的请求头（request headers）是 application/x-www-form-urlencoded 类型，
@@ -18,11 +20,13 @@ export default function Sign() {
             body: params,
         }).then(response => response.json()
         ).then(data => {
-            console.log('Success:', data);
+            if (data.status === 0) navigate('/author/enter');
             localStorage.setItem('token', JSON.stringify(data.token));
             localStorage.setItem('email', JSON.stringify(data.email))
         }).catch((error) => {
-            console.error('Error:', error);
+            console.log('Error:', error);
+            alert('注册失败')
+            navigate('/author/enter')
         });
     }
     return (

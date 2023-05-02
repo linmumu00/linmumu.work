@@ -80,7 +80,7 @@ export default function Enter() {
                             <div className="card-columns">
                                 {
                                     isLoading ? <div >Loading...</div> :
-                                        result.current.length === 0 ? <div><h2>你还没有发表过作品</h2><button onClick={navigate('/post')}>点我去发表作品</button></div> :
+                                        result.current.length === 0 ? <div><h2>你还没有发表过作品</h2><button onClick={() => navigate('/post')}>点我去发表作品</button></div> :
                                             <MyContext.Provider value={{ isShow, onSetisShow }}>
                                                 {result.current.map((img) => {
                                                     return (

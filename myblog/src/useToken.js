@@ -13,8 +13,9 @@ export default function userToken(navigate, components) {
         }
     }).then(response => response.json()
     ).then(data => {
+        console.log(token);
         if (data.status === 0) {
-            console.log('token');
+
             if (components === 'author')
                 navigate('/author/enter');  //如果是author则验证通过后进入enter界面，其它进入后原地不动
         }

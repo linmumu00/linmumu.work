@@ -9,7 +9,7 @@ export default function Post() {
         const savedValue = localStorage.getItem("title");
         return savedValue !== null ? savedValue : "";
     });
-    // 通过localStorage将输入的值存到本地去，可以让用户切换的时候能够保存数据
+    // 通过localStorage将输入的值存到本地去，可以让用户切换(刷新)的时候能够保存数据
     const [content, setContent] = useState(() => {
         const savedValue = localStorage.getItem("content");
         return savedValue !== null ? savedValue : "";
@@ -24,6 +24,11 @@ export default function Post() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (title === '' || content === '') {
+            alert('文章标题或者内容不能为空')
+            return
+        }
 
         const formData = new FormData();
         formData.append('title', title);
@@ -42,6 +47,7 @@ export default function Post() {
                 navigate('/author/enter')  //文章发布成功后到达用户界面
         } catch (error) {
             console.error(error);
+            navigate('/author/enter')
         }
         localStorage.removeItem('title')
         localStorage.removeItem('content')

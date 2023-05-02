@@ -10,8 +10,10 @@ const jwt = require('jsonwebtoken')
 //导入全局的配置文件
 const config = require('../config')
 
+
 // 注册用户的处理函数
 exports.regUser = (req, res) => {
+    let dbresult = 0;
     const userinfo = req.body
     // if (!userinfo.email || !userinfo.password)
     //     return res.send({
@@ -22,27 +24,32 @@ exports.regUser = (req, res) => {
     //定义sql语句，查询用户名是否被占用
     const sqlStr = 'select * from test where email=?'
     db.query(sqlStr, [userinfo.email], (err, results) => {
-        if (err) {
-            return res.cc(err)
-        }
         if (results.length > 0) {
-            return res.cc('用户名被占用了')
+            dbresult = 2
+        }
+        if (err) {
+            dbresult = 1
         }
     })
+
+
     //加密
     userinfo.password = bcrypt.hashSync(userinfo.password, 10)
 
     //插入新用户
     const sql = 'insert into test set ?'
     db.query(sql, { email: userinfo.email, password: userinfo.password }, (err, results) => {
-        if (err) {
-            return res.cc(err)
+        if (dbresult === 2) { dbresult = 0; return res.cc('用户名被占用了'); }   //dbresult用来防止两次res.cc
+        else if (dbresult === 1) { dbresult = 0; return res.cc(err); }
+        else {
+            if (err) {
+                return res.cc(err)
+            }
+            if (results.affectedRows !== 1) {
+                return res.cc('注册用户失败，请稍后重试')
+            }
+            return res.cc('注册成功', 0)
         }
-        if (results.affectedRows !== 1) {
-            return res.cc('注册用户失败，请稍后重试')
-        }
-        return res.cc('注册成功', 0)
-
     })
 
 
