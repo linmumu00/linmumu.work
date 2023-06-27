@@ -20,6 +20,7 @@ export default function Sign() {
             body: params,
         }).then(response => response.json()
         ).then(data => {
+            if (data.status === 1) { alert(`该邮箱已经被注册过了(${data.message})`); navigate('/author/login/sign') }
             if (data.status === 0) navigate('/author/enter');
             localStorage.setItem('token', JSON.stringify(data.token));
             localStorage.setItem('email', JSON.stringify(data.email))
