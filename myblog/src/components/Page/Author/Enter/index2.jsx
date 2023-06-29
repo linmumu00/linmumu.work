@@ -12,7 +12,7 @@ export default function Enter() {
     params.append("email", email)
 
     useEffect(() => {
-        fetch('http://43.138.174.71:3007/user/enter', {
+        fetch('https://www.linmumu.work/api/user/enter', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

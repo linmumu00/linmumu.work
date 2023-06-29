@@ -15,7 +15,7 @@ export default function Register() {
         const params = new URLSearchParams(formData);
         const email = document.getElementById("exampleFormEmail")
 
-        fetch('http://43.138.174.71:3007/api/register', {
+        fetch('https://www.linmumu.work/api/login/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -23,6 +23,7 @@ export default function Register() {
             body: params,
         }).then(response => { return response.json(); }
         ).then(data => {
+            if (data.status === 1) return alert("erreo");
             console.log('Success:', data);
             // 将 email token 保存在本地存储中
             localStorage.setItem('token', JSON.stringify(data.token));

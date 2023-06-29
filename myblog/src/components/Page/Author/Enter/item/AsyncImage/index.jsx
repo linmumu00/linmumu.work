@@ -5,7 +5,7 @@ function AsyncImage(props) {
 
   useEffect(() => {
     const img = document.getElementById(props.id)
-    img.src = `http://43.138.174.71:3007/get/photo/${props.src}`
+    img.src = `https://www.linmumu.work/api/get/photo/${props.src}`
     img.onload = () => {
       setLoaded(true);
     };

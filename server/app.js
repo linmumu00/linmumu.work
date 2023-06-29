@@ -47,10 +47,11 @@ const enterUser = require('./router/enter')
 const userToekn = require('./router/token')
 const postUser = require('./router/post')
 const getPhoto = require('./router/photo')
-app.use('/api', userRouter, getPhoto)
+app.use('/login', userRouter)
 app.use('/function', userToekn)
 app.use('/user', enterUser)
 app.use('/post', postUser)
+app.use('/get', getPhoto)
 
 
 // 错误中间件

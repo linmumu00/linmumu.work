@@ -12,7 +12,7 @@ export default function Sign() {
         const formData = new FormData(event.target);
         const params = new URLSearchParams(formData);
 
-        fetch('http://43.138.174.71:3007/api/sign', {
+        fetch('https://www.linmumu.work/api/login/sign', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
