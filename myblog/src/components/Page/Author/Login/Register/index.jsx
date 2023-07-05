@@ -15,7 +15,7 @@ export default function Register() {
         const params = new URLSearchParams(formData);
         const email = document.getElementById("exampleFormEmail")
 
-        fetch('https://www.linmumu.work/api/login/register', {
+        fetch('http://43.138.174.71:3007/login/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -34,7 +34,7 @@ export default function Register() {
             //成功后跳转到进去的页面
             navigate('/author/enter');
         }).catch((error) => {
-            console.error('Error:', error);
+            console.error('Register Error:' + error);
         });
     }
     return (

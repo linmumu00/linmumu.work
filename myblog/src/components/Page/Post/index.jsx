@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router';
 import userToken from '../../../useToken';
 
@@ -18,6 +18,7 @@ export default function Post() {
         const savedValue = localStorage.getItem("imageFile");
         return savedValue !== null ? savedValue : '';
     });
+
     const email = localStorage.getItem("email")
     const [imagefile, setImagefile] = useState(null)
 
@@ -54,11 +55,50 @@ export default function Post() {
         localStorage.removeItem('imageFile')
     };
 
+    //react里用来节流的方法
+    // const [valid, setValid] = useState(() => {
+    // return true;
+    // });   //需要用useState对valid进行保存
+    // const throttle = (fn, delay) => {
+    //     return function () {
+    //         if (valid) {
+    //             setTimeout(() => {
+    //                 fn.apply(this, arguments)
+    //                 setValid(1)
+    //             }, delay)
+    //             setValid(0)
+    //             // console.log(valid);
+    //         }
+    //     }
+    // }
+
+
+    const debounce = (fn, delay) => {
+        let timer = null;
+        return function () {
+            if (timer !== null) {
+                clearTimeout(timer)
+            }
+            timer = setTimeout(() => {
+                fn.apply(this, arguments)
+            }, delay);
+        }
+    }
+
+    //只进行一次加载
     useEffect(() => {
-        userToken(navigate, 'post')
+        userToken(navigate, "post")
+    }, [userToken])
+
+    function saveLocalStorage(title, content, imageFile) {
         localStorage.setItem("title", title);
         localStorage.setItem("content", content);
         localStorage.setItem("imageFile", imageFile);
+    }
+    var debouncefunc = useCallback(debounce(saveLocalStorage, 2000), [])  //用useCallback勾子就不会让debounce
+
+    useEffect(() => {
+        debouncefunc(title, content, imageFile) //这里不传递参数会只调用但无法更新
     }, [title, content, imageFile])
 
     return (

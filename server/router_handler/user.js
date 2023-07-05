@@ -48,7 +48,19 @@ exports.regUser = (req, res) => {
             if (results.affectedRows !== 1) {
                 return res.cc('注册用户失败，请稍后重试')
             }
-            return res.cc('注册成功', 0)
+            // console.log(results[0]);
+            // TODO：成功，生成 Token 字符串
+            console.log(userinfo);
+            const user = { ...userinfo, user_pic: '' }
+            const tokenStr = jwt.sign(user, config.jwtSecretKey, {
+                expiresIn: config.expiresIn, // token 有效期为 10 个小时
+            })
+            // console.log(tokenStr);
+            res.send({
+                status: 0,
+                message: "注册成功！",
+                token: tokenStr
+            })
         }
     })
 
@@ -79,6 +91,7 @@ exports.login = (req, res) => {
         const tokenStr = jwt.sign(user, config.jwtSecretKey, {
             expiresIn: config.expiresIn, // token 有效期为 10 个小时
         })
+        // console.log(results[0]);
         res.send({
             status: 0,
             message: "登录成功！",

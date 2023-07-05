@@ -12,7 +12,7 @@ export default function Sign() {
         const formData = new FormData(event.target);
         const params = new URLSearchParams(formData);
 
-        fetch('https://www.linmumu.work/api/login/sign', {
+        fetch('http://127.0.0.1:3007/login/sign', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -21,7 +21,7 @@ export default function Sign() {
         }).then(response => response.json()
         ).then(data => {
             if (data.status === 1) { alert(`该邮箱已经被注册过了(${data.message})`); navigate('/author/login/sign') }
-            if (data.status === 0) navigate('/author/enter');
+            if (data.status === 0) { alert(`${data.message}`); navigate('/author/enter'); }
             localStorage.setItem('token', JSON.stringify(data.token));
             localStorage.setItem('email', JSON.stringify(data.email))
         }).catch((error) => {
