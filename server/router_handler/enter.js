@@ -8,7 +8,12 @@ exports.articles = (req, res) => {
     db.query(sql, email, function (err, results) {
 
         // 执行 SQL 语句失败
-        if (err) return res.cc(err)
+        if (err) return res.send({
+            status: 1,
+            message: "出错了",
+            email: email,
+            results: [],
+        })
         // 执行 SQL 语句成功，但是查询到数据条数不等于 1
         if (results.length === 0) {
             return res.send({

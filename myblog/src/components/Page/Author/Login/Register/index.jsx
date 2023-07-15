@@ -15,7 +15,7 @@ export default function Register() {
         const params = new URLSearchParams(formData);
         const email = document.getElementById("exampleFormEmail")
 
-        fetch('http://43.138.174.71:3007/login/register', {
+        fetch('https://www.linmumu.work/api/login/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -23,7 +23,6 @@ export default function Register() {
             body: params,
         }).then(response => { return response.json(); }
         ).then(data => {
-            if (data.status === 1) return alert("erreo");
             console.log('Success:', data);
             // 将 email token 保存在本地存储中
             localStorage.setItem('token', JSON.stringify(data.token));
@@ -34,7 +33,7 @@ export default function Register() {
             //成功后跳转到进去的页面
             navigate('/author/enter');
         }).catch((error) => {
-            console.error('Register Error:' + error);
+            console.log('Register Error:' + error);
         });
     }
     return (

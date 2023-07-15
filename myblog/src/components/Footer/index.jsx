@@ -2,11 +2,9 @@ import React from 'react'
 
 export default function Footer() {
     return (
-        <footer className="footer pt-5 pb-5 text-center">
-
+        <footer className="footer pt-5 pb-5 text-center" style={{ backgroundColor: '#F0FFFF' }}>
             <div className="container">
-
-                <div className="socials-media">
+                {/* <div className="socials-media">
 
                     <ul className="list-unstyled">
                         <li className="d-inline-block ml-1 mr-1"><a href="/javascript" className="text-dark" alt="router"><i
@@ -23,19 +21,14 @@ export default function Footer() {
                             className="fa fa-dribbble"></i></a></li>
                     </ul>
 
-                </div>
-
-
+                </div> */}
                 <p>© <span className="credits font-weight-bold">
                     <a target="_blank" className="text-dark" rel="noreferrer"
                         href="https://beian.miit.gov.cn/" alt="router"><u>粤ICP备2022128421号-1</u></a>
 
                 </span>
                 </p>
-
-
             </div>
-
         </footer>
     )
 }

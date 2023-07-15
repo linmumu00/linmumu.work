@@ -38,7 +38,7 @@ export default function Post() {
         formData.append('email', email);
 
         try {
-            const response = await fetch('http://43.138.174.71:3007/post/articles', {
+            const response = await fetch('https://www.linmumu.work/api/post/articles', {
                 method: 'POST',
                 body: formData,
             });

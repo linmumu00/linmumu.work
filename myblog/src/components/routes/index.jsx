@@ -7,10 +7,15 @@ import Show from "../Page/Show";
 import Register from "../Page/Author/Login/Register";
 import Sign from "../Page/Author/Login/Sign";
 import Forget from "../Page/Author/Login/Forget";
+import Ai from "../Page/Ai";
 
 
 var routes =
     [
+        {
+            path: '/ai',
+            element: <Ai />
+        },
         {
             path: '/show',
             element: <Show />

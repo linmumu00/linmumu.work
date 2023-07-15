@@ -62,6 +62,9 @@ export default function Header() {
                     </ul>
                     <ul className="navbar-nav ml-auto align-items-center">
                         <li className="nav-item">
+                            <MyNavLink to='/ai'>AI</MyNavLink>
+                        </li>
+                        <li className="nav-item">
                             <MyNavLink to='/home'>Home</MyNavLink>
                         </li>
                         <li className="nav-item">

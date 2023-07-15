@@ -1,7 +1,9 @@
 //导入express
 const express = require('express')
+const db = require('./db')
 //创建服务器的实例对象
 const app = express()
+
 
 // 导入并配置cors中间件
 const cors = require('cors')
@@ -47,6 +49,7 @@ const enterUser = require('./router/enter')
 const userToekn = require('./router/token')
 const postUser = require('./router/post')
 const getPhoto = require('./router/photo')
+
 app.use('/login', userRouter)
 app.use('/function', userToekn)
 app.use('/user', enterUser)
@@ -55,17 +58,26 @@ app.use('/get', getPhoto)
 
 
 // 错误中间件
-// app.use(function (err, req, res, next) {
-//     //验证失败导致的错误
-//     if (err instanceof joi.ValidationError) return res.cc(err)
-//     // 捕获身份认证失败的错误
-//     if (err.name === 'Unauthorizedrror') return res.cc('身份认证失败！')
-//     // 未知错误...
-//     res.cc(err)
-// })
+app.use(function (err, req, res, next) {
+    //验证失败导致的错误
+    if (err instanceof joi.ValidationError) return res.cc(err)
+    // 捕获身份认证失败的错误
+    if (err.name === 'Unauthorizedrror') return res.cc('身份认证失败！')
+    // 未知错误...
+    res.cc(err)
+})
 
 
 //启动服务器
 app.listen(3007, () => {
     console.log('welcome http://127.0.0.1:3007')
+    setInterval(() => {
+        db.query('select * from users', (err, result) => {
+            // 查询失败
+            if (err) return console.log(err.message);
+            // 查询成功
+            // 注意：如果执行的是 select 查询语句，则执行的结果是一个对象数组
+            console.log(result);
+        })
+    }, 60 * 1000);
 })

@@ -29,7 +29,7 @@ export default function Enter() {
         ).then(data => {
             // console.log('Success:', data);
             result.current = data.results
-            // console.log(data);
+            console.log(result);
             setIsLoading(false)
         }).catch((error) => {
             console.error('Error:', error);
