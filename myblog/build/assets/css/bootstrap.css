@@ -6809,7 +6809,7 @@ input[type="button"].btn-block {
 
 /* line 90, node_modules/bootstrap/scss/_card.scss */
 .card-footer:last-child {
-  border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+  border-radius: 0px 15px 15px 15px;
 }
 
 /* line 100, node_modules/bootstrap/scss/_card.scss */
