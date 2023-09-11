@@ -10,7 +10,7 @@ app.use(cors());
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-const OPENAI_API_KEY = 'Bearer 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';
+const OPENAI_API_KEY = '';
 
 app.post('/chat', async (req, res) => {
     const data = req.body;
